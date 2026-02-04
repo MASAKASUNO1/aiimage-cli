@@ -1,6 +1,6 @@
 {
   "name": "aiimage-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI画像生成CLI - Gemini & fal.ai (GPT Image 1.5) をサポート",
   "type": "module",
   "main": "./src/index.js",
