@@ -85,15 +85,14 @@ aiimage --config
 ```json
 {
   "defaultProvider": "fal",
+  "defaultSize": "hor",
   "gemini": {
     "apiKey": "your-gemini-api-key",
-    "model": "gemini-3-pro-image-preview",
-    "defaultAspectRatio": "16:9"
+    "model": "gemini-3-pro-image-preview"
   },
   "fal": {
     "apiKey": "your-fal-api-key",
     "model": "fal-ai/gpt-image-1.5",
-    "defaultSize": "1536x1024",
     "defaultQuality": "low"
   }
 }
@@ -121,3 +120,16 @@ aiimage "新しいテーマで同じスタイル" -o styled.png -P gemini -r ori
 ## ライセンス
 
 MIT
+
+## リリース手順（npm）
+
+```bash
+# 内容確認（公開されるファイル一覧）
+npm run pack:check
+
+# バージョン更新（例: patch）
+npm version patch
+
+# 公開
+npm publish
+```

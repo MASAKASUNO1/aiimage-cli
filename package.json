@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "AI画像生成CLI - Gemini & fal.ai (GPT Image 1.5) をサポート",
   "type": "module",
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
   "bin": {
-    "aiimage": "./bin/aiimage.js"
+    "aiimage": "bin/aiimage.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --check src/index.js bin/aiimage.js",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm run test && npm run pack:check"
   },
   "keywords": [
     "ai",
@@ -19,8 +24,14 @@
     "gpt-image",
     "cli"
   ],
-  "author": "",
+  "author": "Masao",
   "license": "MIT",
+  "files": [
+    "bin/*.js",
+    "src/**/*.js",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {
     "@fal-ai/client": "^1.2.1",
     "@google/generative-ai": "^0.24.0",

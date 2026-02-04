@@ -2,14 +2,18 @@
 
 import { Command } from "commander";
 import chalk from "chalk";
+import { createRequire } from "module";
 import { generate, runSetup, openConfig } from "../src/index.js";
+
+const require = createRequire(import.meta.url);
+const { version } = require("../package.json");
 
 const program = new Command();
 
 program
   .name("aiimage")
   .description("AI Image Generator CLI - Gemini & fal.ai (GPT Image 1.5)")
-  .version("1.0.0")
+  .version(version)
   .argument("[prompt]", "Image generation prompt")
   .option("-o, --output <path>", "Output file path (required)")
   .option("-P, --provider <name>", "Provider: gemini or fal (default: from config)")

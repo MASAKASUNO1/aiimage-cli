@@ -25,7 +25,7 @@ ${chalk.gray("Usage:")}
 
 ${chalk.gray("Examples:")}
   ${chalk.cyan("aiimage")} ${chalk.yellow('"A sunset over mountains"')} ${chalk.gray("-o sunset.png")}
-  ${chalk.cyan("aiimage")} ${chalk.yellow('"Cute cat"')} ${chalk.gray("-o cat.png -P gemini -a 16:9")}
+  ${chalk.cyan("aiimage")} ${chalk.yellow('"Cute cat"')} ${chalk.gray("-o cat.png -P gemini -s hor")}
   ${chalk.cyan("aiimage")} ${chalk.yellow('"Modern logo"')} ${chalk.gray("-o logo.png -q high")}
 
 ${chalk.gray("More options:")}
