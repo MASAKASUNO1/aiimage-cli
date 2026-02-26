@@ -29,7 +29,7 @@ const DEFAULT_CONFIG = {
   },
   gemini: {
     apiKey: "",
-    model: "gemini-3-pro-image-preview"
+    model: "gemini-3.1-flash-image-preview"
   },
   fal: {
     apiKey: "",

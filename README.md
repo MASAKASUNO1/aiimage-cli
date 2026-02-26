@@ -88,7 +88,7 @@ aiimage --config
   "defaultSize": "hor",
   "gemini": {
     "apiKey": "your-gemini-api-key",
-    "model": "gemini-3-pro-image-preview"
+    "model": "gemini-3.1-flash-image-preview"
   },
   "fal": {
     "apiKey": "your-fal-api-key",
