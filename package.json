@@ -1,6 +1,6 @@
 {
   "name": "aiimage-cli",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "AI画像生成CLI - Gemini, fal.ai, SVG Diagram, Mermaid変換をサポート",
   "type": "module",
   "main": "./src/index.js",
