@@ -146,6 +146,7 @@ async function svgToImage(svgText, ext) {
  * SVG図解を生成して画像出力
  */
 export async function generateDiagram(options) {
+  // diagramはGemini APIキーが必要なので、設定がなければセットアップを促す
   if (!configExists()) {
     console.log(chalk.yellow("First time setup required.\n"));
     await runSetup();
@@ -204,18 +205,10 @@ export async function generateDiagram(options) {
 
 /**
  * MermaidテキストをWebP/PNG画像に変換
+ * APIキー不要 — 設定ファイルがなくてもデフォルト値で動作する
  */
 export async function generateMermaid(options) {
-  if (!configExists()) {
-    console.log(chalk.yellow("First time setup required.\n"));
-    await runSetup();
-  }
-
-  const config = loadConfig();
-  if (!config) {
-    console.error(chalk.red("Failed to load config. Run 'aimermaid --setup' to reconfigure."));
-    process.exit(1);
-  }
+  const config = configExists() ? loadConfig() : {};
 
   const output = resolve(options.output);
 
