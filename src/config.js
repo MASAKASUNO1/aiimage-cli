@@ -36,6 +36,17 @@ const DEFAULT_CONFIG = {
     model: "fal-ai/gpt-image-1.5",
     defaultQuality: "low",
     supportedQualities: ["low", "medium", "high"]
+  },
+  diagram: {
+    model: "gemini-3-flash-preview",
+    defaultTheme: "dark"
+  },
+  mermaid: {
+    defaultTheme: "default",
+    defaultBackground: "white",
+    defaultWidth: 1920,
+    defaultHeight: 1080,
+    defaultQuality: 85
   }
 };
 
@@ -152,7 +163,7 @@ export async function runSetup() {
       ...DEFAULT_CONFIG.fal,
       apiKey: answers.falApiKey || "",
       defaultQuality: answers.defaultQuality
-    }
+    },
   };
 
   saveConfig(config);

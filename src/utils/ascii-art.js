@@ -10,7 +10,7 @@ ${chalk.cyan("/_/  |_/___/  /___/ /_/  /_/  /_/  |_|\\____//_____/   ")}
 
 ${chalk.gray("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")}
 ${chalk.white.bold("  AI Image Generator CLI")}
-${chalk.gray("  Gemini & fal.ai (GPT Image 1.5) powered")}
+${chalk.gray("  Gemini, fal.ai, SVG Diagram & Mermaid powered")}
 ${chalk.gray("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")}
 `;
   console.log(art);
@@ -20,16 +20,18 @@ export function showSetupComplete() {
   console.log(`
 ${chalk.green("✓")} ${chalk.white.bold("Setup complete!")}
 
-${chalk.gray("Usage:")}
+${chalk.gray("Image generation:")}
   ${chalk.cyan("aiimage")} ${chalk.yellow('"your prompt"')} ${chalk.gray("-o output.png")}
 
-${chalk.gray("Examples:")}
-  ${chalk.cyan("aiimage")} ${chalk.yellow('"A sunset over mountains"')} ${chalk.gray("-o sunset.png")}
-  ${chalk.cyan("aiimage")} ${chalk.yellow('"Cute cat"')} ${chalk.gray("-o cat.png -P gemini -s hor")}
-  ${chalk.cyan("aiimage")} ${chalk.yellow('"Modern logo"')} ${chalk.gray("-o logo.png -q high")}
+${chalk.gray("SVG diagram generation:")}
+  ${chalk.cyan("aidiagram")} ${chalk.yellow('"system architecture"')} ${chalk.gray("-o arch.svg")}
+
+${chalk.gray("Mermaid to image:")}
+  ${chalk.cyan("aimermaid")} ${chalk.yellow('"graph TD; A-->B"')} ${chalk.gray("-o flow.webp")}
+  ${chalk.cyan("aimermaid")} ${chalk.gray("-i diagram.mmd -o output.webp")}
 
 ${chalk.gray("More options:")}
-  ${chalk.cyan("aiimage --help")}     ${chalk.gray("Show all options")}
-  ${chalk.cyan("aiimage --config")}   ${chalk.gray("Open config file")}
+  ${chalk.cyan("<command> --help")}     ${chalk.gray("Show all options")}
+  ${chalk.cyan("<command> --config")}   ${chalk.gray("Open config file")}
 `);
 }

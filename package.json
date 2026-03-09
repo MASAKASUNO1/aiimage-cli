@@ -1,17 +1,19 @@
 {
   "name": "aiimage-cli",
   "version": "1.0.2",
-  "description": "AI画像生成CLI - Gemini & fal.ai (GPT Image 1.5) をサポート",
+  "description": "AI画像生成CLI - Gemini, fal.ai, SVG Diagram, Mermaid変換をサポート",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js"
   },
   "bin": {
-    "aiimage": "bin/aiimage.js"
+    "aiimage": "bin/aiimage.js",
+    "aidiagram": "bin/aidiagram.js",
+    "aimermaid": "bin/aimermaid.js"
   },
   "scripts": {
-    "test": "node --check src/index.js bin/aiimage.js",
+    "test": "node --check src/index.js bin/aiimage.js bin/aidiagram.js bin/aimermaid.js",
     "pack:check": "npm pack --dry-run",
     "prepublishOnly": "npm run test && npm run pack:check"
   },
@@ -22,6 +24,9 @@
     "gemini",
     "fal",
     "gpt-image",
+    "diagram",
+    "svg",
+    "mermaid",
     "cli"
   ],
   "author": "Masao",
@@ -39,6 +44,10 @@
     "commander": "^12.1.0",
     "inquirer": "^9.2.23",
     "open": "^10.1.0"
+  },
+  "optionalDependencies": {
+    "@xmldom/xmldom": "^0.9.0",
+    "sharp": "^0.33.0"
   },
   "engines": {
     "node": ">=18.0.0"
