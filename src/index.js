@@ -14,12 +14,36 @@ import { generateDiagramWithGemini } from "./providers/diagram.js";
 import { convertMermaid } from "./providers/mermaid.js";
 
 /**
- * 画像を保存
+ * 画像バッファを軽量化して保存
  */
-function saveImage(buffer, outputPath) {
+async function saveImage(buffer, outputPath) {
   const outputDir = dirname(outputPath);
   mkdirSync(outputDir, { recursive: true });
-  writeFileSync(outputPath, buffer);
+
+  const ext = extname(outputPath).toLowerCase();
+  let out = buffer;
+
+  try {
+    const sharp = (await import("sharp")).default;
+    const originalSize = buffer.length;
+
+    if (ext === ".png") {
+      out = await sharp(buffer).png({ compressionLevel: 9, adaptiveFiltering: true }).toBuffer();
+    } else if (ext === ".webp") {
+      out = await sharp(buffer).webp({ quality: 85 }).toBuffer();
+    } else if (ext === ".jpg" || ext === ".jpeg") {
+      out = await sharp(buffer).jpeg({ quality: 85, mozjpeg: true }).toBuffer();
+    }
+
+    if (out.length < originalSize) {
+      const saved = ((1 - out.length / originalSize) * 100).toFixed(0);
+      console.log(chalk.gray(`Optimized: ${(originalSize / 1024).toFixed(0)}KB → ${(out.length / 1024).toFixed(0)}KB (-${saved}%)`));
+    }
+  } catch {
+    // sharpが無ければそのまま保存
+  }
+
+  writeFileSync(outputPath, out);
   console.log(chalk.green(`\n✓ Image saved to: ${outputPath}`));
 }
 
@@ -101,7 +125,7 @@ export async function generate(options) {
       });
     }
 
-    saveImage(buffer, output);
+    await saveImage(buffer, output);
     console.log(chalk.green("✓ Image generation completed!"));
 
   } catch (error) {
@@ -261,7 +285,7 @@ export async function generateMermaid(options) {
     });
 
     // 画像を保存
-    saveImage(buffer, output);
+    await saveImage(buffer, output);
     console.log(chalk.green("✓ Mermaid conversion completed!"));
 
   } catch (error) {
