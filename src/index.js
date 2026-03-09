@@ -125,11 +125,14 @@ async function svgToImage(svgText, ext) {
   }
 
   // SVG内のHTMLエンティティをUnicode文字に置換（librsvgが処理できないため）
-  const entities = { "&copy;": "\u00A9", "&reg;": "\u00AE", "&trade;": "\u2122", "&amp;": "&", "&lt;": "<", "&gt;": ">", "&nbsp;": "\u00A0" };
   let cleaned = svgText;
+  // 既知のHTMLエンティティをUnicodeに変換
+  const entities = { "&copy;": "\u00A9", "&reg;": "\u00AE", "&trade;": "\u2122", "&nbsp;": "\u00A0", "&mdash;": "\u2014", "&ndash;": "\u2013", "&laquo;": "\u00AB", "&raquo;": "\u00BB", "&bull;": "\u2022" };
   for (const [entity, char] of Object.entries(entities)) {
     cleaned = cleaned.replaceAll(entity, char);
   }
+  // 裸の & （XMLエンティティ参照でないもの）を &amp; にエスケープ
+  cleaned = cleaned.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;|#x[0-9a-fA-F]+;)/g, "&amp;");
 
   let pipeline = sharp(Buffer.from(cleaned)).resize(1920, 1080, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } });
 
